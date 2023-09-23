@@ -1,8 +1,8 @@
 ---
 title: "Git for Newbies"
 subtitle: "CorrelAid Project Cycle Kickoff"
-author: "Michael Aydinbas"
-date: "2023-09-23"
+author: "Frie Preu"
+date: "2021-03-19"
 output:
   xaringan::moon_reader:
     css: ["xaringan-themer.css", "custom.css"]
@@ -16,7 +16,6 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-#icons::download_fontawesome()
 knitr::opts_chunk$set(
   fig.width=9, fig.height=3.5, fig.retina=3,
   out.width = "100%",
@@ -29,7 +28,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r xaringan-themer, warning=FALSE, include=FALSE}
+```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
 ca_blue <- "#3863a2"
 ca_blue2 <- "#3c61aa"
@@ -58,32 +57,28 @@ style_duo_accent(
 ## Who am I? 
 
 
-- Michael Aydinbas
-- Senior Data Engineer at New Work SE, 4 years of consultancy
-- Project lead at CorrelAid and CorrelAidSwitzerland since 2021
+- Frie Preu
+- COO at CorrelAid (volunteer since 2015), before in IT consulting
 - Add me:
-    - LinkedIn: [Michael Aydinbas](https://www.linkedin.com/in/michael-aydinbas/)
-    - GitHub: [pmayd](https://github.com/pmayd)
+    - LinkedIn: [Friedrike Preu](https://www.linkedin.com/in/friedrike-preu-a2bb46a7/)
+    - Twitter: [@ameisen_strasse](https://twitter.com/ameisen_strasse)
+    - GitHub: [friep](https://github.com/friep)
+    - GitLab: [friep](https://gitlab.com/friep)
 
 ---
 
 ## Agenda
 
 .pull-left[
-#### Basics
 
 - **Motivation**: Why Git?
 - **Authentication**
-- **"Downloading" Repositories**: Forking and Cloning
-- **local workflow**: `git add` and `git commit`
-- **"Uploading" and "Downloading" Commits**: `git push` and `git pull` 
-
-#### Advanced topics
-
-- **gitignore**
-- **Merge conflicts**
-- **GitHub issues**
-- **Working with branches**
+- Forking and Cloning: **"Downloading" Repositories**
+- Add and Commit: the **local workflow**
+- Push and Pull: **"Uploading" and "Downloading" Commits**
+- (Merge conflicts)
+- (GitHub issues)
+- (Working with branches)
 ]
 
 
@@ -138,7 +133,6 @@ class: center, middle
 ---
 
 ## Version Control to the Rescue!
-
 - Example: [https://github.com/CorrelAid/git-newbie-playground](https://github.com/CorrelAid/git-newbie-playground)
 - just a simple README.md for you 
 - or: use the repository of your project
@@ -151,7 +145,6 @@ class: center, middle, inverse
 ---
 
 ## GitHub and Git
-
 - Please see the [README](https://github.com/CorrelAid/git-newbie-playground) for the requirements
   - create GitHub account
   - install Git
@@ -171,19 +164,17 @@ class: center, middle, inverse
 
 .pull-left[
   ### HTTPS
-  
   - with GitHub username + password -> easy to understand (not recommended anymore)
   - with GitHub username + Personal Access Token (PAT) -> recommended
   - store PAT in git credential store to avoid entering over and over 
-  - `git clone https://...` 
+  - clone `https://...` 
 ]
 .pull-right[
  ### SSH
- 
  - with a *keypair* (`id_rsa.pub` and `id_rsa`)
  - public key, private key cryptography (see e.g. [Youtube](https://www.youtube.com/watch?v=AQDCe585Lnc))
  - advantage: only set up once, no need to remember password
- - `git clone git@github.com:...`
+ - clone `ssh://...`
 ]
 
 ---
@@ -199,7 +190,7 @@ Scream if something does not work!
 
 class: center, middle, inverse
 
-# Downloading Repositories - Fork and Clone
+# Download data - fork and clone
 
 ---
 
@@ -215,10 +206,9 @@ class: center, middle, inverse
 
 --
 
-`r emo::ji("bulb")` a repository can live at two places:
-- only **local**: files are on your computer and nowhere else  
-- only **remote**: files are stored online at GitHub/GitLab/...
-- **local and remote**: files are both on your computer and stored online, **and the repositories can be different**
+`r emo::ji("bulb")` a repository can live at several places:
+- **local** copy on your laptop
+- on the **remote**: GitHub / GitLab
 
 ---
 
@@ -227,10 +217,10 @@ class: center, middle, inverse
 ### Fork
 > A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project. <sup>1</sup> 
 
-A *fork* can only be created online and not locally.
-
 ### Clone 
-> When you create a repository on GitHub, it exists as a remote repository. You can clone your repository to create a local copy on your computer and sync between the two locations.  <sup>2</sup>
+> When you create a repository on GitHub, it exists as a remote repository. You can clone your repository to create a local copy on your computer and sync between the two locations.  <sup>2</sup> 
+
+
  
 .footnote[
 [1] [Fork a repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) by GitHub Docs team and contributors, [Creative Commons Attribution 4.0 International](https://github.com/github/docs/blob/main/LICENSE)
@@ -240,24 +230,24 @@ A *fork* can only be created online and not locally.
 
 ---
 
-## Hands On - Clone a Eepository
+## Hands On - clone a repository
 
-### Clone your project repository
 
+### clone your project repository
 - https://github.com/CorrelAid/{project-name}/
 - check the slack channel of your project for the exact URL (it should be at the top in the "Topic" box)
 
-### Clone your own `git-tryout` repo
-
+### clone your own `git-tryout` repo
 - see instructions here [https://github.com/CorrelAid/git-newbie-playground](https://github.com/CorrelAid/git-newbie-playground)
 
 ---
 
-## Hands On - Clone a Repo with the Command Line
+## Hands On - clone a repo with the command line
 
 .pull-left[
-1. Use `cd` in your terminal or Git bash to navigate to your target location (use the tab key for autocompletion)
-2. Use `git clone` and either the HTTPS (`https://github.com/{username}/git-newbie-playground.git`) or SSH (`git@github.com:{username}/git-newbie-playground.git`) URL of the repository
+1. use `cd` in your terminal or Git bash to navigate to your target location (use the tab key for autocompletion)
+2. `git clone https://github.com/{username}/git-newbie-playground` or the URL of your project repository 
+
 ]
 
 .pull-right[
@@ -266,8 +256,7 @@ A *fork* can only be created online and not locally.
 ]
 
 ---
-
-## Hands On - Clone a Repo with RStudio
+## Hands On - clone a repo with RStudio
 
 .pull-left[
 1. In the top right corner,  click on the dropdown and choose New project
@@ -284,41 +273,37 @@ A *fork* can only be created online and not locally.
 
 class: center, middle, inverse
 
-# What is Git?
+
+# The Local Workflow - Add und Commit 
 
 ---
+## Commit
 
-## Git Snapshots
+> A commit is the Git equivalent of a "save".[...] Git committing is an operation that acts upon a collection of files and directories. <sup>1</sup>
 
-> Git thinks of its data more like a series of snapshots of a miniature filesystem. With Git, every time you commit, or save the state of your project, Git basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot. <sup>1</sup>
-
-
-![git graph](images/github/snapshots.png)
-
+--> Commit = a "save point" in Git. 
 
 .footnote[
-[1] [Getting Started - What is Git?](https://www.git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
+[1] [Saving changes](https://www.atlassian.com/git/tutorials/saving-changes) by Atlassian Bitbucket, [Creative Commons Attribution 2.5 Australia License](https://creativecommons.org/licenses/by/2.5/au/)
 ]
 
 ---
 
-## The Three States
+## Commit
 
-Git has three main states that your files can reside in: modified, staged, and committed:
+- a commit stores **a full snapshot** of the current state of the repository
+- to the user, it is shown as so-called "diffs", i.e. what has changed since the last commit
+  - edits of file(s)
+  - creation of new file(s)
+  - deletion of file(s)
+  - renaming of file(s)
 
-- **Modified** means that you have changed the file but have not committed it to your database yet.
-- **Staged** means that you have marked a modified file to go into your next commit snapshot.
-- **Committed** means that the data is safely stored in your local database.
-
-![areas](images/github/areas.png)
-
+--> making a commit = taking a snapshot 
 ---
 
-## Git History
+## Git history
 
-> Everything in Git is checksummed before it is stored and is then referred to by that checksum. This means it’s impossible to change the contents of any file or directory without Git knowing about it.<sup>1</sup>
-
-Git stores a history of snapshots / commits in its graph. 
+git stores a history of snapshots / commits in its graph. 
 
 ```bash
 git graph
@@ -326,13 +311,7 @@ git graph
 
 ![git graph](images/command_line/git_graph.png)
 
-
-.footnote[
-[1] [Getting Started - What is Git?](https://www.git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
-]
-
 ---
-
 ## Git history - Show a commit
 
 the "letter `r emo::ji("salad")`" is the short version of the so called "SHA hash" or "commit hash" -> it comes from "hashing" the snapshot the commit represents. 
@@ -341,8 +320,7 @@ We can have a look at a commit using `git show {hash}`
 
 ![git show](images/command_line/git_show.png)
 ---
-
-## Hands On: Investigate the Commit History
+## Hands On: Investigate the commit history
 
 Investigate the commits made so far in your repository. How many are there? Who has made them? What changes did they introduce?
 
@@ -363,45 +341,9 @@ Investigate the commits made so far in your repository. How many are there? Who 
 ]
 ---
 
-class: center, middle, inverse
-
-
-# The Local Workflow - Add und Commit 
-
----
-## Commit
-
-> A commit is the Git equivalent of a "save".[...] Git committing is an operation that acts upon a collection of files and directories. <sup>1</sup>
-
---> Commit = a "save point" or snapshot in Git. 
-
-The basic Git workflow goes something like this:
-
-1. You modify files in your working tree.
-2. You selectively stage just those changes you want to be part of your next commit, which adds only those changes to the staging area.
-3. You do a **commit**, which takes the files as they are in the staging area and stores that snapshot permanently to your Git directory.
-
-.footnote[
-[1] [Saving changes](https://www.atlassian.com/git/tutorials/saving-changes) by Atlassian Bitbucket, [Creative Commons Attribution 2.5 Australia License](https://creativecommons.org/licenses/by/2.5/au/)
-]
-
----
-
-## Commit
-
-- a commit stores **a full snapshot** of the current state of the repository
-- to the user, it is shown as so-called "diffs", i.e. what has changed since the last commit
-  - edits of file(s)
-  - creation of new file(s)
-  - deletion of file(s)
-  - renaming of file(s)
-
---> making a commit = taking a snapshot 
----
-
 class: center
 
-## Steps to Create a Commit
+## Making a commit involves 2 steps
 
 .pull-left[
 ![Staging Area](images/other/staging.png)
@@ -415,14 +357,15 @@ class: center
 ]
 
 
+
 ---
 
-## Making a Commit - Adding
+## Making a commit - Adding
 
 In the staging area, you **draft** your commit and choose which of your changes you want to "save" in Git
 
 
-**Most important Git command**: see what is currently going on `r emo::ji("eyes")`
+**see what you have changed** `r emo::ji("eyes")`
 
 ```bash
 git status
@@ -433,10 +376,10 @@ git diff
 git diff --staged
 ```
 
-Add individual files or folders
+**add individual files or folders**
 
 ```bash
-git add {path} (-p)
+git add {path}
 ```
 
 or everything
@@ -446,11 +389,7 @@ git add .
 ```
 
 ---
-## Making a Commit - Adding
-
-```bash
-git status
-```
+## Making a commit - Adding
 
 ![](images/command_line/git_status_1.png)
 
@@ -461,34 +400,25 @@ git add file.txt
 ```
 
 ---
-
-## Making a Commit - Adding
-
+## Making a commit - Adding
 `.gitignore` and `new_file.txt` will not be part of the commit:
 
 ![](images/command_line/git_status_after_add.png)
-
-Before you run `git commit` make sure you always! inspect the changes first with `git status`.
-
 ---
+### Making a commit - Commit
 
-## Making a Commit - Commit
-
-Now, we can commit:
+Now, we can commit (`-m ""` adds the commit message):
 ```bash
 git commit -m "change file.txt"
 ```
 
-A commit must have a commit message. If you omit `-m`, `git` will open the default editor so you can enter a message. 
-
-
 ---
 
-## Making a Commit - Shortcuts
+## Making a commit - Shortcuts
 
 We can add all changes with: 
 
-```bash
+```
 git add .
 ```
 
@@ -500,11 +430,10 @@ git add .
 git commit -a -m 'directly committing all changes'
 ```
 
-<font color="red">it's tempting but use both with care!</font>
+it's tempting but use both with care!
 
 ---
-
-## Making a Commit in RStudio
+## Making a commit in RStudio
 
 .pull-left[
 - Git pane, then "Commit" button -> extra window opens
@@ -516,7 +445,6 @@ git commit -a -m 'directly committing all changes'
 knitr::include_graphics("images/rstudio/git_commit.png")
 ```
 ]
-
 ---
 
 class: center, middle, inverse
@@ -536,8 +464,7 @@ class: center, middle, inverse
 - In R: RMarkdown 
 ---
 
-## Markdown Syntax
-
+## Markdown syntax
 - `#(###)`: make a header
 - `*` or `-`: make bullet point lists
 - `[click here](https://git-scm.com/docs/)`: add a link
@@ -545,21 +472,19 @@ class: center, middle, inverse
 
 ---
 
-## Hands On - Make a Commit
 
+## Hands On - make a commit
 .pull-left[
 ### command line
-
-1. Change the content of `README.md` and create a new file `test.py` with a simple print statement
+1. Change the `README.md` somewhere and create a new file `test.py` with a simple print statement
 2. commit only the new file, not your changes to the README
 3. Run `git graph` to see your commit
 ]
 .pull-right[
 ### RStudio
-
-1. Change the content of `README.md` and create a new file `test.R` with a simple print statement
+1. Change the `README.md` somewhere and create a new file `test.R` with a simple print statement
 2. commit only the new file, not your changes to the README
-3. go to the Git Pane 
+- go to the Git Pane 
 ]
 
 
@@ -567,14 +492,14 @@ class: center, middle, inverse
 class: center, middle
 
 
-## Git Quizzed!
+## Git quizzed!
 
 ![Lokal](images/other/git_workflow_lokal_without_solution.png)
 
 ---
 class: center, middle
 
-## Git Quizzed!
+## Git quizzed!
 
 
 ![Lokal](images/other/git_workflow_lokal_with_solution.png)
@@ -582,24 +507,25 @@ class: center, middle
 ---
 class: center, middle, inverse
 
-# Sync Files - Push and Pull
+# Sync files - Push and Pull
 
 ---
 
 
-## Git Hosting
+## Git  Hosting
 
 - GitHub: `r icons::fontawesome("github")` 
 - GitLab: `r icons::fontawesome("gitlab")` 
-- Bitbucket: `r icons::fontawesome("bitbucket")`
 - Keybase: `r icons::fontawesome("keybase")` 
 
 ---
 
-## Git local and Git remote
+## Git local and git remote
 
-- **local**: your laptop/machine
-- **remote**: in the Cloud (GitLab, GitHub...) - you typically only have one remote (called "origin") but you can have multiple
+... what? 
+
+- **local**: your laptop / machine
+- **remote**: in the Cloud (GitLab, GitHub...) - you typically only have one remote ("origin")
 
 ```bash
 $ git remote -v
@@ -607,88 +533,70 @@ origin	https://github.com/CorrelAid/git-newbie-playground.git (fetch)
 origin	https://github.com/CorrelAid/git-newbie-playground.git (push)
 ```
 
-Both `git status` and `git graph` can show you the local HEAD and the remote HEAD:
-
 ![Git Remote](images/command_line/git_graph_remote.png)
 ---
 
-## Git HEAD
-
-> How does Git know what branch you’re currently on? It keeps a special pointer called `HEAD`. In Git, this is a pointer to the local branch and commit you’re currently on. In this case, you’re still on master. <sup>1</sup>
-
-![Git HEAD](images/github/branch-and-history.png)
-
-
-.footnote[
-[1] [Git branches](https://www.git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
-]
-
----
 
 ## Sync: Git Pull and Git Push
 
-"Download" new commits from GitHub
+- Git Pull: "download" new commits from GitHub
+- Git Push: "upload" the commits you made locally to GitHub
+---
+## Sync: Git Pull and Git Push
+
+"Download" from GitHub
 
 ```bash
 git pull
 ```
 
-"Upload" your local commits to GitHub
+"Upload" to GitHub
 
 ```bash
 git push
 ```
 
 ---
-
 ## Pull and Push - RStudio
 
 - Git pane / Git commit window
 - button down (blue): pull
-- button up (green): push
+- buttom up (green): push
 
 
 ---
-
 class: center, middle
 
 # Hands On: Push!
 
 ![Push the button](https://media.giphy.com/media/139lMwJ9ow7bKE/giphy.gif)
-
-Upload your latest local changes to GitHub and check the results in the browser.
-
 .footnote[
 [Go Do It Gif](https://giphy.com/gifs/ren-and-stimpy-139lMwJ9ow7bKE) via [Giphy](https://giphy.com), [original source](https://www.fanpop.com/clubs/ren-and-stimpy/images/35557868/title/ren-stimpy-photo)
 ]
 
 ---
-
 ## Pull, Commit, Push Workflow
-
-1. Run `git pull` before you resume your work to get the updates from your team mates that they have uploaded 
-2. Run `git add` whenever you feel like you have achieved something or you want to "save" some intermediate code snippets 
-3. Run `git commit` when you are ready to save your changes as a new snapshot (commit often!)
-4. Run `git push` to share your commits with others or to "backup" your work
-
+1. Run `pull` before you resume your work to get the updates from your team mates that they have uploaded 
+2. `commit` whenever you feel like you have achieved something or you want to "save" some intermediate code snippets (commit often!)
+3. `push` every other commit
 ---
-
 class: center, middle
 
-## Git Quizzed!
+## Git quizzed!
 
 ![Push Pull](images/other/git_workflow_with_github_without_solution.png)
 
 ---
 
-## Git Quizzed!
+
+## Git quizzed!
 
 ![Push Pull](images/other/git_workflow_with_github_with_solution.png)
 
 ---
 class: center, middle, inverse
 
-# When Things Go Wrong...
+# When things go wrong...
 
 ---
 class: center, middle
@@ -697,27 +605,18 @@ class: center, middle
 
 ---
 
-## When Things Go Wrong...
+## When things go wrong...
 
-1. as long nothing is pushed, all is (kind of) OK -> don't push if things are messed up!
+1. as long nothing is pushed, all is (kind of) ok -> don't push if things are messed up!
 2. if things are really messed up: save your code somewhere else and clone again
 3. read the error messages, they can be quite useful!
 4. if in doubt, ask the other team members or reach out to me. :) 
 
-There are special Git commands to help you in case of unwanted changes like [git restore](https://www.git-scm.com/docs/git-restore), [git reset](https://www.git-scm.com/docs/git-reset), and [git rebase](https://www.git-scm.com/docs/git-rebase). However, you have to really understand them before you apply them!
-
 ---
 
-## Merge Conflicts
+## Merge conflicts
 
 > Merge conflicts occur when competing changes are made to the same line of a file, or when one person edits a file and another person deletes the same file. <sup>1</sup>
-
-```bash
-$ git merge whitespace
-Auto-merging hello.rb
-CONFLICT (content): Merge conflict in hello.rb
-Automatic merge failed; fix conflicts and then commit the result.
-```
 
 .footnote[
 [2] [Resolving a merge conflict using the command line](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line) by GitHub Docs team and contributors, [Creative Commons Attribution 4.0 International](https://github.com/github/docs/blob/main/LICENSE)
@@ -725,8 +624,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 ---
 
-## Merge Conflicts
-
+## Merge conflicts
 1. you commit changes 
 --
 
@@ -749,8 +647,7 @@ Source: [you decide season 5 GIF by Portlandia](https://giphy.com/gifs/portlandi
 
 ]
 ---
-
-## Solving Merge Conflicts
+## Solving merge conflicts
 
 - **you** need to solve merge conflicts on your machine -> decide which version / changes you keep
 - options:
@@ -759,7 +656,6 @@ Source: [you decide season 5 GIF by Portlandia](https://giphy.com/gifs/portlandi
   - VSCode has an integrated [merge conflict tool](https://www.youtube.com/watch?v=kBIMGOxqqnk) which is very nice 
   - other Git GUIs also might have one
   - RStudio does not have a merge conflict tool :( -> have to resolve manually
-  
 ```
 <<<<<<< HEAD
 i added this line in Rstudio without knowing that someone else edited it
@@ -769,10 +665,8 @@ introduce a merge conflict, hihihihiihi
 ```
 
 `r emo::ji("warning")`: a file can have **multiple** conflicts!
-
 ---
-
-## Solving Merge Conflicts
+## Solving merge conflicts
 
 ```
 <<<<<<< HEAD
@@ -782,7 +676,7 @@ introduce a merge conflict, hihihihiihi
 >>>>>>> 6185e4e97db38d774fdcd2e41a31788362856d51
 ```
 
-- `<<<<<<<`: my current changes (remember: `HEAD` points to your local current commit)
+- `<<<<<<<`: my current changes (HEAD)
 - `=======`: seperates my changes from the "incoming" changes
 - `>>>>>>>`: end of "incoming" changes, shows the commit hash or the branch name (more on this later)
 
@@ -793,35 +687,18 @@ merge conflicts might be a bit frightening but you can do it! :)
 
 **save, add, and commit!**
 
----
-
-## Abort Merge
-
-You can also abort a Git merge any time!
-
-```bash
-$ git status -sb
-## master
-UU hello.rb
-
-$ git merge --abort
-
-$ git status -sb
-## master
-```
-
-The `git merge --abort` option tries to revert back to your state before you ran the merge.
 
 ---
 
-## Hands On: Merge Conflicts
+## Hands On: Merge conflicts
 
-1. Edit `README.md` **on GitHub** in a certain line
-2. Edit `README.md` locally on your machine **in the same line** (edit it differently!)
-3. Commit your own changes (don't push yet!)
-4. Run `git push` -> you should get an error that the push was rejected due to changes on the remote
-4. Run `git pull` -> this should also fail due to merge conflicts
-5. Solve the merge conflict locally and push your own version. `r emo::ji("devil")`
+1. edit `README.md` **on GitHub** in a certain line
+2. edit `README.md` locally on your machine **in the same line** (edit it differently!)
+3. commit your own changes (don't push yet!)
+4. `pull` 
+5. solve the merge conflict locally and push your own version. `r emo::ji("devil")`
+
+
 
 ---
 class: center, middle, inverse
@@ -838,18 +715,16 @@ class: center, middle, inverse
 ## Issues
 
 
-- issues: todos / bugs / ideas / tasks
-- can be assigned to a team member (but sadly only to a single person)
-- allows for detailed discussions and supports Markdown
-- can be assigned to a Kanban board in GitHub Projects
+- issues: todos / bugs / ideas
 - each issue has a number 
-- \#<issueno> in commit message associates commit with issue
+- \#issueno in commit message associates commit with issue
 
 - example: [https://github.com/CorrelAid/hugo-website/issues](https://github.com/CorrelAid/hugo-website/issues) 
 
 ---
 
 ## Hands On: Issues
+
 
 1. create an issue "add a GIF" 
 2. go to [giphy.com](giphy.com), find a funny gif and add it to the README  (-> copy link)
@@ -859,7 +734,7 @@ class: center, middle, inverse
 
 ---
 
-## Recap Issues
+## Recap issues
 
 - very useful for project organization 
 - discussion is centralized (**but**: don't put sensitive information in GitHub)
@@ -890,14 +765,13 @@ class: center, middle
 
 
 ## Branches
-
 .smaller[
 ### Branch
 > A branch represents an independent line of development. Branches serve as an abstraction for the edit/stage/commit process. You can think of them as a way to request a brand new working directory, staging area, and project history.<sup>1</sup>
 
 ### Checkout
 
-> The git checkout command lets you navigate between the branches created by `git branch`. Checking out a branch updates the files in the working directory to match the version stored in that branch, and it tells Git to record all new commits on that branch. Think of it as a way to select which line of development you’re working on.<sup>2</sup> 
+> The git checkout command lets you navigate between the branches created by git branch. Checking out a branch updates the files in the working directory to match the version stored in that branch, and it tells Git to record all new commits on that branch. Think of it as a way to select which line of development you’re working on.<sup>2</sup> 
 
 
 .footnote[
@@ -909,7 +783,7 @@ class: center, middle
 
 ---
 
-## Why Branches?
+## Why branches?
 
 - stability: only have working code on "main" branch 
   - e.g. CI/CD directly to dev
@@ -928,15 +802,10 @@ class: center, middle
 
 ## Branches Workflow
 
-1. create a branch in Git with a meaningful name (e.g. `issue1-add-favorite-gif`)
-
-   ```
-   git switch -c "#1-add-favorite-gif"
-   ```
-
-   ```
-   git checkout -b "#1-add-favorite-gif
-   ```
+1. create a branch in Git with a meaningful name (e.g. issue1-add-favorite-gif)
+```
+git switch -c "#1-add-favorite-gif" # or git checkout -b "#1-add-favorite-gif"
+```
 --
 
 2. checkout branch: branch is automatically checked out (check with `git graph`: `HEAD` points to `#1-add-favorite-gif`)
@@ -950,10 +819,10 @@ class: center, middle
 
 --
 
-5. merge your branch into the main branch (checkout main, then see 4.) (better: Pull-Request)
+5. merge your branch into the main branch (checkout main, then see 4.)
 
 
-`r emo::ji("white_check_mark")`  You can always switch between branches using `git checkout`. This will modify your working tree and load all files for this branch. However, uncommitted files will be unaffected and stay!
+`r emo::ji("white_check_mark")`  You can always switch between branches using `git checkout`
 
 ---
 ## Branches Workflow - RStudio
@@ -964,7 +833,9 @@ class: center, middle
 - switch branches: click on dropdown / branch name
 ]
 .pull-right[
-![RStudio branches](images/rstudio/git_branches.png)
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/rstudio/git_branches.png")
+```
 ]
 ---
 
@@ -972,12 +843,9 @@ class: center, middle
 
 > Pull requests let you tell others about changes you've pushed to a branch in a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before your changes are merged into the base branch. <sup>1</sup>
 
-`r emo::ji("fire")` The most useful GitHub feature for your whole project (besides GitHub Projects...). Use it!
 
-- Useful "review" and feedback functionality 
+- useful "review" and feedback functionality 
 - [GitHub Hello World](https://guides.github.com/activities/hello-world/#pr)
-- Make the life of reviewers easier and don't open huge PR with a lot of changes. Instead, commit often and do small PR. 
-- Open PR early (first commit of a new branch) so that people can comment on your work while you are still working on it to avoid reverting changes that were a lot of effort
 
 .footnote[
 [1] [About pull requests](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) by GitHub Docs team and contributors, [Creative Commons Attribution 4.0 International](https://github.com/github/docs/blob/main/LICENSE)
@@ -985,25 +853,24 @@ class: center, middle
 
 ---
 
-## Hands On - Branches and PRs
+## Hands On - branches and PRs
 
-1. Create a new issue (think of something!)
-2. Create a branch called `issue2-{description}` locally
-3. Work on issue 2
-4. Push the branch 
-5. Open a pull request 
-6. Merge the PR
-
+1. create a new issue (think of something!)
+2. create a branch called `issue2-{description}` locally
+3. work on issue 2
+4. push the branch 
+5. open a pull request 
+6. merge the PR
 ---
 
 ## Real life: Branches and Pull Requests 
-- Branches
+- branches
   - very useful when developing R packages / applications / shiny apps in a team: feature branches
   - relevance for data analysis projects: enables working in parallel on several methods, keep main clean of non-working code, backup (!)
 - merge requests
   - centralize discussion
-  - find and discuss best approaches to a problem
   - code review stage
+
 
 ---
 
@@ -1013,20 +880,16 @@ class: center, middle, inverse
 ---
 
 ## .gitignore
-
 The special `.gitignore` file lets you exclude certain files from Git (and GitHub). This is especially useful for...
 
 - sensitive data (e.g. GDPR data that should not be uploaded to GitHub)
 - user configuration files (e.g. `.Rproj.user`)
-- data that can be fetched from elsewhere (data sets like CSV files downloaded from the Internet)
-- big files
 
 The `.gitignore` file is just a list of files and paths that you don't want to add to Git.
 
 --
 
 ### Accidents happen
-
 If you accidentally committed files to the repository: 
 
 ```
@@ -1037,9 +900,9 @@ followed by a commit and adding the file to `.gitignore`. (learn more at the bot
 
 ---
 
-## Git Stash
+## Git stash
 
-> `git stash` temporarily shelves (or stashes) changes you've made to your working copy so you can work on something else, and then come back and re-apply them later on. Stashing is handy if you need to quickly switch context and work on something else, but you're mid-way through a code change and aren't quite ready to commit.<sup>1</sup>
+> git stash temporarily shelves (or stashes) changes you've made to your working copy so you can work on something else, and then come back and re-apply them later on. Stashing is handy if you need to quickly switch context and work on something else, but you're mid-way through a code change and aren't quite ready to commit.<sup>1</sup>
 
 
 .footnote[
@@ -1047,7 +910,7 @@ followed by a commit and adding the file to `.gitignore`. (learn more at the bot
 ]
 
 ---
-## Git Stash
+## Git stash
 
 .center[
 ![stash](https://media.giphy.com/media/l0HlxJfVUKhtR8Jna/giphy.gif)
@@ -1060,6 +923,7 @@ followed by a commit and adding the file to `.gitignore`. (learn more at the bot
 - useful for (temporarily) storing stuff not ready to commit 
 
 
+
 ---
 class: middle, center, inverse
 
@@ -1069,22 +933,18 @@ class: middle, center, inverse
 
 ## What we learned today
 
-- Inspect Git history and single commits
---
-
 - Fork and clone a GitHub repository
 --
 
-- Make a commit
+- make a commit in the command line
 --
 
-- Pull and push commits from / to GitHub
+- pull and push commits from / to GitHub
 --
+- solve merge conflicts
 
-- Solve merge conflicts
 --
-
-- Work with issues, branches and pull requests 
+- work with issues, branches and pull requests 
 
 ---
 class: middle, center, inverse
@@ -1096,7 +956,6 @@ class: middle, center, inverse
 ## If you ever need help...contact me!
 
 ### Frie Preu
-
  + `r icons::fontawesome("briefcase")` COO at CorrelAid / @frie on Slack
  + `r icons::fontawesome("github")` [friep](https://github.com/friep)
  + `r icons::fontawesome("gitlab")` [friep](https://gitlab.com/friep)
@@ -1105,5 +964,4 @@ class: middle, center, inverse
  + `r icons::fontawesome("slack")` #help channel
 
 ### Resources
-
 Check the README of the [git-newbie-playground repo](https://github.com/CorrelAid/git-newbie-playground) for some more resources!
